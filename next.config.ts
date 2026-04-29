@@ -1,5 +1,7 @@
 import type {NextConfig} from 'next';
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   eslint: {
@@ -10,8 +12,10 @@ const nextConfig: NextConfig = {
   },
   output: 'export',
   trailingSlash: true,
-  basePath: '/Pre-booking-system',
-  assetPrefix: '/Pre-booking-system/',
+  ...(isProduction && {
+    basePath: '/Pre-booking-system',
+    assetPrefix: '/Pre-booking-system/',
+  }),
   images: {
     unoptimized: true,
     remotePatterns: [
