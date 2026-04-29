@@ -8,6 +8,8 @@ export type MenuItem = {
   isVeg: boolean;
 };
 
+const IMAGE_BASE_PATH = process.env.NODE_ENV === "production" ? "/Pre-booking-system" : "";
+
 export const MENU_CATEGORIES = ["All", "Starters", "Main Course", "Breads"];
 
 export const MENU_ITEMS: MenuItem[] = [
@@ -17,7 +19,7 @@ export const MENU_ITEMS: MenuItem[] = [
     description: "Aromatic basmati rice layered with marinated chicken, cooked in authentic Dum style with secret spices.",
     price: 320,
     category: "Main Course",
-    image: "/menu-images/hyderabadchickendumbriyani.png",
+    image: `${IMAGE_BASE_PATH}/menu-images/hyderabadchickendumbriyani.png`,
     isVeg: false,
   },
   {
@@ -26,7 +28,7 @@ export const MENU_ITEMS: MenuItem[] = [
     description: "Tender pieces of mutton dry roasted with Chettinad spices, curry leaves, and black pepper.",
     price: 450,
     category: "Starters",
-    image: "/menu-images/muttonchukka.png",
+    image: `${IMAGE_BASE_PATH}/menu-images/muttonchukka.png`,
     isVeg: false,
   },
   {
@@ -35,7 +37,7 @@ export const MENU_ITEMS: MenuItem[] = [
     description: "Soft paneer cubes simmered in a rich, creamy, and slightly sweet tomato-onion gravy.",
     price: 280,
     category: "Main Course",
-    image: "/menu-images/paneerbuttermassala.png",
+    image: `${IMAGE_BASE_PATH}/menu-images/paneerbuttermassala.png`,
     isVeg: true,
   },
   {
@@ -44,7 +46,7 @@ export const MENU_ITEMS: MenuItem[] = [
     description: "Crispy cauliflower florets marinated in spiced yogurt and deep-fried to perfection.",
     price: 180,
     category: "Starters",
-    image: "/menu-images/gobi65.png",
+    image: `${IMAGE_BASE_PATH}/menu-images/gobi65.png`,
     isVeg: true,
   },
   {
@@ -53,7 +55,7 @@ export const MENU_ITEMS: MenuItem[] = [
     description: "Soft, chewy Indian bread topped with minced garlic and fresh cilantro, cooked in a tandoor.",
     price: 60,
     category: "Breads",
-    image: "/menu-images/garlicnaan.png",
+    image: `${IMAGE_BASE_PATH}/menu-images/garlicnaan.png`,
     isVeg: true,
   }
 ];
