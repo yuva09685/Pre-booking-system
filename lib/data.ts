@@ -8,7 +8,10 @@ export type MenuItem = {
   isVeg: boolean;
 };
 
-const IMAGE_BASE_PATH = process.env.NODE_ENV === "production" ? "/Pre-booking-system" : "";
+const IMAGE_BASE_PATH =
+  process.env.NODE_ENV === "production"
+    ? "https://yuva09685.github.io/Pre-booking-system"
+    : "";
 
 export const MENU_CATEGORIES = ["All", "Starters", "Main Course", "Breads"];
 
