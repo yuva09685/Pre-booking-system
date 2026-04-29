@@ -7,8 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "build:pages": "next build && node scripts/export-to-docs.mjs",
-    "predeploy": "pnpm run build",
-    "deploy": "gh-pages -d out",
+    "predeploy": "pnpm run build:pages",
+    "deploy": "gh-pages -d docs",
     "start": "next start",
     "lint": "eslint .",
     "clean": "next clean"
