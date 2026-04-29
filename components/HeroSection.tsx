@@ -41,8 +41,8 @@ export function HeroSection({ onOrderNow }: { onOrderNow: () => void }) {
           
             <div className="relative rounded-[24px] overflow-hidden shadow-xl lg:transform lg:rotate-2 hover:rotate-0 transition-transform duration-500 h-[400px] lg:h-[500px] border border-[#e5e0d5]">
               <Image 
-                src="https://picsum.photos/seed/restaurant/1000/800" 
-                alt="Authentic Indian Biryani" 
+                src="/menu-images/restaurant.png" 
+                alt="Restaurant interior" 
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
