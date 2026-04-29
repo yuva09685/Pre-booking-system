@@ -1,6 +1,7 @@
 import type {NextConfig} from 'next';
 
 const isProduction = process.env.NODE_ENV === 'production';
+const basePath = isProduction ? '/Pre-booking-system' : '';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -16,6 +17,9 @@ const nextConfig: NextConfig = {
     basePath: '/Pre-booking-system',
     assetPrefix: '/Pre-booking-system/',
   }),
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
   images: {
     unoptimized: true,
     remotePatterns: [

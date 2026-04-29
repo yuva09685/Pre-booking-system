@@ -3,6 +3,9 @@ import Image from "next/image";
 import { ShoppingBag, ChefHat, Clock } from "lucide-react";
 
 export function HeroSection({ onOrderNow }: { onOrderNow: () => void }) {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const heroImage = `${basePath}/menu-images/restaurant.png`;
+  
   return (
     <div className="relative overflow-hidden pt-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -41,7 +44,7 @@ export function HeroSection({ onOrderNow }: { onOrderNow: () => void }) {
           
             <div className="relative rounded-[24px] overflow-hidden shadow-xl lg:transform lg:rotate-2 hover:rotate-0 transition-transform duration-500 h-[400px] lg:h-[500px] border border-[#e5e0d5]">
               <Image 
-                src="/menu-images/restaurant.png" 
+                src={heroImage} 
                 alt="Restaurant interior" 
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
