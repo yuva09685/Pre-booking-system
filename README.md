@@ -1,20 +1,37 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Atchayas Pre-Order System
 
-# Run and deploy your AI Studio app
+Skip the line. Pre-order your food directly from Atchayas, track preparation in real-time, and get notified when it's ready for pickup.
 
-This contains everything you need to run your app locally.
+## Features
 
-View your app in AI Studio: https://ai.studio/apps/56203345-77f5-4a68-9029-2284f8a2f423
+- **Menu Browsing**: Explore our authentic South Indian menu.
+- **Pre-ordering**: Order ahead and skip the wait.
+- **Real-time Tracking**: Monitor your order status from 'Placed' to 'Ready'.
+- **Kitchen Dashboard**: Dedicated panel for staff to manage orders.
 
-## Run Locally
+## Deployment
 
-**Prerequisites:**  Node.js
+This project is optimized for deployment on **Vercel**.
 
+### Local Development
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1.  **Install dependencies**:
+    ```bash
+    pnpm install
+    ```
+2.  **Run the development server**:
+    ```bash
+    pnpm dev
+    ```
+3.  **Build for production**:
+    ```bash
+    pnpm build
+    ```
+
+## Tech Stack
+
+- **Framework**: Next.js 15
+- **Styling**: Tailwind CSS 4
+- **State Management**: Local Storage (Simulated Backend)
+- **Animations**: Motion (framer-motion)
+- **Icons**: Lucide React
