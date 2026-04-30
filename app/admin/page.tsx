@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useSyncExternalStore } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { formatCurrency } from "@/lib/helpers";
@@ -8,36 +8,61 @@ import { getOrders, updateOrderStatus } from "@/lib/store";
 import { useAuth } from "@/lib/auth-context";
 import { Order } from "@/lib/types";
 import { MENU_ITEMS } from "@/lib/data";
-import { ChefHat, CheckSquare, ArrowRight, LogOut } from "lucide-react";
-
-const ORDER_STORAGE_KEY = "atchayas_orders";
-
-const subscribeToOrders = (callback: () => void) => {
-  window.addEventListener("orders_updated", callback);
-  window.addEventListener("storage", callback);
-  return () => {
-    window.removeEventListener("orders_updated", callback);
-    window.removeEventListener("storage", callback);
-  };
-};
-
-const getOrdersSnapshot = () => getOrders();
+import { ChefHat, CheckSquare, ArrowRight, LogOut, Loader2 } from "lucide-react";
 
 export default function AdminDashboard() {
   const router = useRouter();
   const { user, logout, isAuthenticated } = useAuth();
-  const orders = useSyncExternalStore(subscribeToOrders, getOrdersSnapshot, () => []);
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    
+    if (!isAuthenticated) {
+      router.push("/admin/login");
+      return;
+    }
+
+    const initialOrders = getOrders();
+    setOrders(initialOrders);
+
+    const handleUpdate = () => {
+      setOrders(getOrders());
+    };
+
+    window.addEventListener("orders_updated", handleUpdate);
+    window.addEventListener("storage", handleUpdate);
+
+    return () => {
+      window.removeEventListener("orders_updated", handleUpdate);
+      window.removeEventListener("storage", handleUpdate);
+    };
+  }, [mounted, isAuthenticated, router]);
 
   const handleLogout = () => {
     logout();
     router.push("/admin/login");
   };
 
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-[#fdfbf7] flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-[#5a5a40]" />
+      </div>
+    );
+  }
+
   if (!isAuthenticated || !user) {
-    if (typeof window !== "undefined") {
-      router.push("/admin/login");
-    }
-    return null;
+    return (
+      <div className="min-h-screen bg-[#fdfbf7] flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-[#5a5a40]" />
+      </div>
+    );
   }
 
   const newOrders = orders.filter((o) => o.status === "placed");

@@ -1,8 +1,8 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useSyncExternalStore } from "react";
 
-type UserRole = "admin" | "cashier" | null;
+type UserRole = "admin" | null;
 
 interface AuthContextType {
   user: UserRole;
@@ -11,6 +11,8 @@ interface AuthContextType {
   isAuthenticated: boolean;
 }
 
+const STORAGE_KEY = "atchayas_user";
+
 const AuthContext = createContext<AuthContextType>({
   user: null,
   login: () => {},
@@ -18,27 +20,32 @@ const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
 });
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<UserRole>(null);
+const subscribe = (callback: () => void) => {
+  if (typeof window === "undefined") return () => {};
+  window.addEventListener("storage", callback);
+  return () => window.removeEventListener("storage", callback);
+};
 
-  if (typeof window !== "undefined") {
-    const saved = localStorage.getItem("atchayas_user");
-    if ((saved === "admin" || saved === "cashier") && !user) {
-      setUser(saved as UserRole);
-    }
-  }
+const getStoredUser = (): UserRole => {
+  if (typeof window === "undefined") return null;
+  const saved = localStorage.getItem(STORAGE_KEY);
+  return saved === "admin" ? "admin" : null;
+};
+
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const user = useSyncExternalStore(subscribe, getStoredUser, () => null);
 
   const login = (role: UserRole) => {
     if (typeof window !== "undefined" && role) {
-      localStorage.setItem("atchayas_user", role);
-      setUser(role);
+      localStorage.setItem(STORAGE_KEY, role);
+      window.dispatchEvent(new Event("storage"));
     }
   };
 
   const logout = () => {
     if (typeof window !== "undefined") {
-      localStorage.removeItem("atchayas_user");
-      setUser(null);
+      localStorage.removeItem(STORAGE_KEY);
+      window.dispatchEvent(new Event("storage"));
     }
   };
 
