@@ -1,33 +1,20 @@
 import type {NextConfig} from 'next';
 
-const isProduction = process.env.NODE_ENV === 'production';
-const basePath = isProduction ? '/Pre-booking-system' : '';
-
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
   typescript: {
-    ignoreBuildErrors: false,
-  },
-  output: 'export',
-  trailingSlash: true,
-  ...(isProduction && {
-    basePath: '/Pre-booking-system',
-    assetPrefix: '/Pre-booking-system/',
-  }),
-  env: {
-    NEXT_PUBLIC_BASE_PATH: basePath,
+    ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'picsum.photos',
         port: '',
-        pathname: '/**', // This allows any path under the hostname
+        pathname: '/**',
       },
       {
         protocol: 'https',
