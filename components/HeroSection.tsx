@@ -37,7 +37,11 @@ export function HeroSection({ onOrderNow }: { onOrderNow: () => void }) {
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-5 h-5 text-[#5a5a40]" />
-                <span>Instant Updates</span>
+                <span>Save Time</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <ShoppingBag className="w-5 h-5 text-[#5a5a40]" />
+                <span>Online Payment</span>
               </div>
             </div>
           </div>

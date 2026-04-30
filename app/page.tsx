@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { HeroSection } from "@/components/HeroSection";
+import { HowItWorks } from "@/components/HowItWorks";
 import { MenuSection } from "@/components/MenuSection";
 import { CheckoutSection } from "@/components/CheckoutSection";
 import { OrderTracking } from "@/components/OrderTracking";
@@ -119,6 +120,7 @@ export default function App() {
               <HeroSection onOrderNow={() => {
                 document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' });
               }} />
+              <HowItWorks />
               <MenuSection cart={cart} updateCart={updateCart} />
             </motion.div>
           )}
@@ -159,7 +161,7 @@ export default function App() {
           <span className="hidden sm:inline">•</span>
           <span className="hidden sm:inline">Zero Commission Ordering</span>
           <span className="hidden sm:inline">•</span>
-          <Link href="/admin" className="hover:text-[#5a5a40] font-bold text-[#5a5a40] cursor-pointer">Kitchen Panel</Link>
+          <Link href="/admin/login" className="hover:text-[#5a5a40] font-bold text-[#5a5a40] cursor-pointer">Kitchen Panel</Link>
           <span className="hidden sm:inline">•</span>
           <span>Support: +91 98765 43210</span>
         </div>
